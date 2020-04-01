@@ -17,12 +17,12 @@ if (isset($_POST['submit'])) {
     } else {
         //Checks if input caracters are not valid
         if (!preg_match("/^[a-zA-Z]*$/", $first) || !preg_match("/^[a-zA-Z]*$/", $last)) {
-            header("Location: ../signupForm.php?signup=char");
+            header("Location: ../signupForm.php?signup=char&email=$email&username=$username");
             exit();
         } else {
             //Checks if the eamil is not vaild
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                header("Location: ../signupForm.php?signup=email");
+                header("Location: ../signupForm.php?signup=email&first=$first&last=$last&username=$username");
                 exit();
             } else {
                 //Inserts the data into the database
@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) {
                     mysqli_stmt_execute($stmt);
                 }
 
-                header("Location: ../index.php?signup=success");
+                header("Location: ../signupForm.php?signup=success");
             }
         }
     }

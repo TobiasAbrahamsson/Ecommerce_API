@@ -12,6 +12,7 @@
         <ul>
             <li><a href="index.php">Home</a></li>
             <li><a href="signupForm.php">Signup</a></li>
+            <li><a href="loginForm.php">Login</a></li>
         </ul>
     </nav>
 </header>

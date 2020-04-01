@@ -7,3 +7,11 @@
 header {
   background: lightblue;
 }
+
+.error {
+  color: red;
+}
+
+.success {
+  color: limegreen;
+}
