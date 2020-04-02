@@ -43,6 +43,8 @@
         <br>
         <input type="text" name="password" placeholder="Password">
         <br>
+        <input type="text" name="passwordRepeat" placeholder="Repeat Password">
+        <br>
         <button type="submit" name="submit">Sign Up</button>
     </form>
 
@@ -61,8 +63,17 @@
             } elseif ($signupCheck == "email") {
                 echo "<p class='error'>You used invalid email!</p>";
                 exit();
+            } elseif ($signupCheck == "password") {
+                echo "<p class='error'>Passwords did not match!</p>";
+                exit();
+            } elseif ($signupCheck == "usernametaken") {
+                echo "<p class='error'>The username is already taken!</p>";
+                exit();
+            } elseif ($signupCheck == "emailtaken") {
+                echo "<p class='error'>The e-mail is already in use! <a href='loginForm.php'>Login</a></p>";
+                exit();
             } elseif ($signupCheck == "success") {
-                echo "<p class='success'>You have signed up! </p><a href='loginForm.php'>Login</a>";
+                echo "<p class='success'>You have signed up! <a href='loginForm.php'>Login</a></p>";
                 exit();
             }
         }
