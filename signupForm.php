@@ -4,7 +4,7 @@
 
 <section>
     <h1>Signup Form</h1>
-    <form action="config/signup.php" method="POST">
+    <form action="v1/users/signup.php" method="POST">
         <?php
             if (isset($_GET['first'])) {
                 $first = $_GET['first'];
@@ -41,9 +41,9 @@
             }
         ?>
         <br>
-        <input type="text" name="password" placeholder="Password">
+        <input type="password" name="password" placeholder="Password">
         <br>
-        <input type="text" name="passwordRepeat" placeholder="Repeat Password">
+        <input type="password" name="passwordRepeat" placeholder="Repeat Password">
         <br>
         <button type="submit" name="submit">Sign Up</button>
     </form>

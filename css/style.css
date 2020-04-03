@@ -15,3 +15,8 @@ header {
 .success {
   color: limegreen;
 }
+
+img {
+  width: 300px;
+  height: 200px;
+}
