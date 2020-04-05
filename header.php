@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,9 +15,27 @@
     <nav>
         <ul>
             <li><a href="index.php">Home</a></li>
-            <li><a href="signupForm.php">Signup</a></li>
-            <li><a href="loginForm.php">Login</a></li>
             <li><a href="addPostForm.php">Add Product</a></li>
+        </ul>
+        <br>
+        <ul>
+            <?php
+                if (isset($_SESSION['user_id'])) {
+                    echo '
+                        <li>
+                            <form action="v1/users/logout.php" method="POST">
+                                <button type="submit" name="logout-submit">Logout</button>
+                            </form>
+                        </li>
+                    ';
+                }
+                else {
+                    echo '
+                        <li><a href="loginForm.php">Login</a></li>
+                        <li><a href="signupForm.php">Signup</a></li>
+                    ';
+                }
+            ?>
         </ul>
     </nav>
 </header>

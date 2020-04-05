@@ -11,9 +11,11 @@
         <br>
         <input type="text" name="description" placeholder="Description">
         <br>
-        <input type="text" name="price" placeholder="Price">
+        <input type="text" name="brand" placeholder="Brand">
         <br>
-        <input type="text" name="quantity" placeholder="Quantity">
+        <input type="number" name="price" placeholder="Price">
+        <br>
+        <input type="number" name="quantity" placeholder="Quantity">
         <br>
         <select name="color">
             <option value="green">Green</option>
@@ -23,5 +25,24 @@
         <br>
         <button type="submit" name="submit">Add Post</button>
     </form>
+
+    <?php
+        if (!isset($_GET['addPost'])) {
+            exit();
+        } else {
+            $addPostCheck = $_GET['addPost'];
+
+            if ($addPostCheck == "empty") {
+                echo "<p class='error'>You did not fill in all the fields!</p>";
+                exit();
+            } elseif ($addPostCheck == "error") {
+                echo "<p class='error'>You did not select a product image!</p>";
+                exit();
+            } elseif ($addPostCheck == "success") {
+                echo "<p class='success'>Product successfuly added!";
+                exit();
+            }
+        }
+    ?>
     
 </section>

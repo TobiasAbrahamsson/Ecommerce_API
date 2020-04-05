@@ -16,6 +16,14 @@ header {
   color: limegreen;
 }
 
+.login-status {
+  color: limegreen;
+}
+
+.logout-status {
+  color: red;
+}
+
 img {
   width: 300px;
   height: 200px;

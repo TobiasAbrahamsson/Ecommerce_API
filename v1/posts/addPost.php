@@ -12,23 +12,24 @@ if (isset($_POST['submit'])) {
     $image = mysqli_real_escape_string($conn, $_FILES['image']['name']);
     $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
     $color = mysqli_real_escape_string($conn, $_POST['color']);
+    $brand = mysqli_real_escape_string($conn, $_POST['brand']);
 
     //Checks if inputs are empty
-    if (empty($name) || empty($description) || empty($price) || empty($quantity) || empty($color)) {
+    if (empty($name) || empty($description) || empty($price) || empty($quantity) || empty($color) || empty($brand)) {
         header("Location: ../../addPostForm.php?addPost=empty");
         exit();
     } else {
         //Inserts the data into the database
-        $sql = "INSERT INTO products (product_name, product_description, product_price, product_image, product_quantity, product_color) 
-        VALUES ('$name', '$description', '$price', '$image', '$quantity', '$color');";
-        mysqli_query($conn, $sql);
+        $sql = "INSERT INTO products (product_name, product_description, product_price, product_image, product_quantity, product_color, product_brand) 
+        VALUES ('$name', '$description', '$price', '$image', '$quantity', '$color', '$brand');";
 
         if (!move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-            header("Location: ../../signupForm.php?addPost=error");
+            header("Location: ../../addPostForm.php?addPost=error");
             exit();
         }
         else {
-            header("Location: ../../signupForm.php?addPost=Success");
+            mysqli_query($conn, $sql);
+            header("Location: ../../addPostForm.php?addPost=success");
             exit();
         }
        
