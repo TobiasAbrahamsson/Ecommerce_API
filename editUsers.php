@@ -16,12 +16,12 @@
             <th>Email</th>
             <th>Username</th>
             <th>Registered</th>
-            <th>Delete User</th>
+            <th>Select</th>
 
         </tr>
 
         <?php
-            $sql = "SELECT * FROM users;";
+            $sql = "SELECT * FROM users WHERE user_role='user';";
             $result = mysqli_query($conn, $sql);
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_array($result)) {
@@ -33,8 +33,23 @@
                         <td><?php echo $row['user_email']; ?></td>
                         <td><?php echo $row['user_username']; ?></td>
                         <td><?php echo $row['user_registered']; ?></td>
+                        <td><a href=v1/users/deleteUser.php?id=<?php echo $row['user_id']; ?>>Delete</a></td>
                     </tr>
                     <?php
+                }
+            }
+
+            if (!isset($_GET['editUser'])) {
+                exit();
+            } else {
+                $signupCheck = $_GET['editUser'];
+
+                if ($signupCheck == "userDeleted") {
+                    echo "<p class='success'>User successfuly removed!</p>";
+                    exit();
+                } elseif ($signupCheck == "userNotDeleted") {
+                    echo "<p class='error'>User did not get removed!</p>";
+                    exit();
                 }
             }
         ?>

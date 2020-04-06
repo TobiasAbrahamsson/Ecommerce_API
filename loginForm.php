@@ -10,4 +10,23 @@
         <button type="submit" name="login-submit">Login</button>
         
     </form>
+
+    <?php
+        if (!isset($_GET['login'])) {
+            exit();
+        } else {
+            $signupCheck = $_GET['login'];
+
+            if ($signupCheck == "empty") {
+                echo "<p class='error'>You did not fill in all the fields!</p>";
+                exit();
+            } elseif ($signupCheck == "wrongPassword") {
+                echo "<p class='error'>Username or password is incorct!</p>";
+                exit();
+            } elseif ($signupCheck == "nouser") {
+                echo "<p class='error'>Username or password is incorct!</p>";
+                exit();
+            } 
+        }
+    ?>
 </section>
