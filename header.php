@@ -1,5 +1,6 @@
 <?php
     session_start();
+    require 'config/database_handler.php';
 ?>
 
 <!DOCTYPE html>
@@ -15,12 +16,17 @@
     <nav>
         <ul>
             <li><a href="index.php">Home</a></li>
-            <li><a href="addPostForm.php">Add Product</a></li>
+            <li><a href="shoppingCart.php">Shopping Cart</a></li>
+            <?php
+                if (isset($_SESSION['admin'])) {
+                    echo '<li><a href="adminPage.php">Admin Page</a></li>';
+                }
+            ?>
         </ul>
         <br>
         <ul>
             <?php
-                if (isset($_SESSION['user_id'])) {
+                if (isset($_SESSION['user_id']) || isset($_SESSION['admin'])) {
                     echo '
                         <li>
                             <form action="v1/users/logout.php" method="POST">

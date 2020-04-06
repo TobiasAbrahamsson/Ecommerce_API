@@ -4,9 +4,15 @@
 ?>
 
 <section>
+
+    <h1>Home</h1>
+
     <?php
         if (isset($_SESSION['user_id'])) {
             echo '<p class="login-status">You are logged IN</p>';
+        }
+        elseif (isset($_SESSION['admin'])) {
+            echo '<p class="login-status">You are logged IN as Admin</p>';
         }
         else {
             echo '<p class="logout-status">You are logged OUT</p>';
@@ -15,51 +21,36 @@
 
     <hr>
 
-    <h1>Home</h1>
-
-    <hr>
-
-    <form method="GET">
-        <select name="colorSorter">
-            <option value="green">Green</option>
-            <option value="yellow">Yellow</option>
-            <option value="blue">Blue</option>
-        </select>
-        <button type="submit" name="submit">Sort</button>
-    </form>
-
-    <h3>Brand</h3>
-
-    <hr>
-
     <?php
 
-        if (!isset($_GET['submit'])) {
-            $sql = "SELECT * FROM products;";
-            $result = mysqli_query($conn, $sql);
+        $sql = "SELECT * FROM products;";
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_array($result)) {
-                echo "<div id='products'>";
-                    echo "<img src='images/".$row['product_image']."' alt='product'>";
-                    echo "<p>".$row['product_name']."</p>";
-                    echo "<p>".$row['product_price']."</p>";
-                    echo "<p>".$row['product_description']."</p>";
-                    echo "<p>".$row['product_color']."</p>";
-                echo "</div>";
-            }
-        }
-        else {
-            $color = $_GET['colorSorter'];
-
-            $sql = "SELECT * FROM products WHERE product_color = '$color';";
-            $result = mysqli_query($conn, $sql);
-            while ($row = mysqli_fetch_array($result)) {
-                echo "<div id='products'>";
-                    echo "<img src='images/".$row['product_image']."' alt='product'>";
-                    echo "<p>".$row['product_name']."</p>";
-                    echo "<p>".$row['product_price']."</p>";
-                    echo "<p>".$row['product_description']."</p>";
-                    echo "<p>".$row['product_color']."</p>";
-                echo "</div>";
+                ?>
+                <form method="POST" action="index.php>">
+                    <div id="products">
+                        <img src="images/<?php echo $row['product_image']; ?>">
+                        <h3><?php echo $row['product_name']; ?></h3>
+                        <h3><?php echo $row['product_price']; ?></h3>
+                        <p><?php echo $row['product_description']; ?></p>
+                        <input type="hidden" name="hidden_name" value="<?php echo $row['product_name']; ?>">
+                        <input type="hidden" name="hidden_price" value="<?php echo $row['product_price']; ?>">
+                        <?php
+                            if ($row['product_quantity'] > 0) {
+                                echo '
+                                <input type="text" name="selectQuantity" value="1">
+                                <br>
+                                <button type="submit" name="cart-submit">Add to cart</button>
+                                ';
+                            }
+                            else {
+                                echo "Out of stock";
+                            }
+                        ?>
+                    </div>
+                </form>
+                <?php
             }
         }
     ?>

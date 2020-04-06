@@ -30,12 +30,22 @@ if (isset($_POST['login-submit'])) {
                     exit();
                 }
                 elseif ($passwordCheck == true) {
-                    session_start();
-                    $_SESSION['user_id'] = $row['user_id'];
-                    $_SESSION['user_username'] = $row['user_username'];
+                    $userRole = $row['user_role'];
+                    if ($userRole == 'admin') {
+                        session_start();
+                        $_SESSION['admin'] = $row['user_role'];
+
+                        header("Location: ../../index.php?login=successAdmin");
+                        exit();
+                    }
+                    else {
+                        session_start();
+                        $_SESSION['user_id'] = $row['user_id'];
+                        $_SESSION['user_username'] = $row['user_username'];
 
                     header("Location: ../../index.php?login=success");
                     exit();
+                    }
                 }
                 else {
                     header("Location: ../../loginForm.php?login=wrongPassword");
